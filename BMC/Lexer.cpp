@@ -4,22 +4,13 @@ void Lexer::setSequence(const std::string sequence) {
 	this->sequence = sequence;
 }
 
-void Lexer::Lex() {
-	const std::string temp = sequence;
-	for (; index < temp.size(); index++) {
-		if (isSpace())
-			continue;
-		if (isOperator()) {
-			tokens.push_back(Token(Token::Type::Operator, std::string(1, peek())));
-			continue;
-		}
-		std::string number;
-		while (isNumber()) {
-			number += peek();
-			next();
-		}
-		tokens.push_back(Token(Token::Type::Number, number));
+std::vector<Token> Lexer::tokenize() {
+	std::vector<Token> tokens;
+	for (; index < sequence.size(); ) {
+		auto token = lex();
+		tokens.push_back(token);
 	}
+	return tokens;
 }
 
 bool Lexer::isNumber() {
@@ -65,17 +56,16 @@ bool Lexer::isSpace() {
 	default:
 		return false;
 	}
-	return false;
 }
 
-char Lexer::next() {
-	return sequence[++index];
-}
-
-char Lexer::peek() {
-	return sequence[index];
-}
-
-std::vector<Token> Lexer::getTokens() {
-	return tokens;
+Token Lexer::lex() {
+	while (isSpace()) index++;
+	if (isOperator()) {
+		return Token(Token::Type::Operator, sequence[index++]);
+	}
+	std::string number;
+	do {
+		number += sequence[index++];
+	} while (isNumber());
+	return Token(Token::Type::Number, number);
 }

@@ -1,5 +1,7 @@
 #include "Token.h"
 
+Token::Token(Type type, const char value) : type{ type }, value{ value } {}
+
 Token::Token(Type type, const std::string value) : type{ type }, value{value} {}
 
 std::ostream& operator<<(std::ostream& stream, const Token& token) {

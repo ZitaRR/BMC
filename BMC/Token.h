@@ -8,7 +8,8 @@ public:
 		Number,
 		Operator
 	};
-	Token(Type _type, const std::string value);
+	Token(Type type, const char value);
+	Token(Type type, const std::string value);
 	friend std::ostream& operator<<(std::ostream& stream, const Token& token);
 	friend std::ostream& operator<<(std::ostream& stream, const Type& type);
 private:

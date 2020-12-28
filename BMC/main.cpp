@@ -3,7 +3,7 @@
 
 int main() {
 	Lexer lex = Lexer();
-	lex.setSequence("456 - 34 * 34");
+	lex.setSequence("(456 - 34) * 34");
 	for (auto token : lex.tokenize()) {
 		std::cout << token << std::endl;
 	}

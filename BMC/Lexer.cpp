@@ -35,6 +35,8 @@ bool Lexer::isNumber() {
 bool Lexer::isOperator() {
 	switch (sequence[index])
 	{
+	case 40:
+	case 41:
 	case 42:
 	case 43:
 	case 45:
